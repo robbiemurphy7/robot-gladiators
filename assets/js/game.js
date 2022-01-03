@@ -23,10 +23,26 @@ var fight = function() {
     console.log(
     playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining.");
 
+    // CHECK ENEMY'S HEALTH
+    if (enemyHealth <= 0) {
+        window.alert(enemyName + " has died!");
+    }
+    else {
+        window.alert(enemyName + " still has " + enemyHealth + " health left.");
+    }
+
     // LOG A RESULTING MESSAGE TO THE CONSOLE SO WE KNOW THAT IT WORKED
     console.log(
-        enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remining.");
-        
+        enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining.");
+
+    // CHECK PLAYER'S HEALTH
+    if (playerHealth <= 0) {
+        window.alert(playerName + " has died!");
+    }
+    else {
+        window.alert(playerName + " still has " + playerHealth + " health left.");
+    }
+
 };
 
 fight();
