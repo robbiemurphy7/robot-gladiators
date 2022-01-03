@@ -9,40 +9,61 @@ var enemyName = "Roborto";
 var enemyHealth = 50;
 var enemyAttack = 12;
 
+var playerMoney = 10;
+
 var fight = function() {
     // ALERT PLAYERS THAT THEY ARE STARTING THE ROUND
     window.alert("Welcome to Robot Gladiators!");
 
-    // SUBTRACT THE VALUE OF 'playerAttack' FROM THE VALUE OF 'enemyHealth' AND USE THAT RESULT TO UPDATE THE VALUE IN THE 'enemyHealth' VARIABLE
-    enemyHealth = enemyHealth - playerAttack;
+    var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
 
-    // SUBTRACT THE VALUE OF 'enemyAttack' FROM THE VALUE OF 'playerHealth' AND USE THAT RESULT TO UPDATE THE VALUE IN THE 'playerHealth' VARIABLE
-    playerHealth = playerHealth - enemyAttack;
+    // IF PLAYER CHOSES TO FIGHT, THEN FIGHT
+    if (promptFight === "fight" || promptFight === "FIGHT") {
+        // REMOVE ENEMY'S HEALTH BY SUBTRACTING THE AMOUNT SET IN THE playerAttack VARIABLE
+        enemyHealth = enemyHealth - playerAttack;
+        console.log(
+            playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining."
+        );
 
-    // LOG A RESULTING MESSAGE TO THE CONSOLE SO WE KNOW THAT IT WORKED
-    console.log(
-    playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining.");
+        // CHECK ENEMY'S HEALTH
+        if (enemyHealth <= 0) {
+            window.alert(enemyName + " has died!");
+        } else {
+            window.alert(enemyName + " still has " + enemyHealth + " health left.");
+        }
 
-    // CHECK ENEMY'S HEALTH
-    if (enemyHealth <= 0) {
-        window.alert(enemyName + " has died!");
+        // REMOVE PLAYER'S HEALTH BY SUBTRACTING THE AMOUNT SET IN THE enemyAttack VARIABLE
+        playerHealth = playerHealth - enemyAttack;
+        console.log(
+            enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
+        );
+
+        // CHECK PLAYER'S HEALTH
+        if (playerHealth <= 0) {
+            window.alert(playerName + " has died!");
+        } else {
+            window.alert(playerName + " still has " + playerHealth + " health left.");
+        }
+
+        // IF PLAYER CHOOSES TO SKIP
+    } else if (promptFight === "skip" || promptFight === "SKIP"){
+        // CONFIRM PLAYER WANTS TO SKIP
+        var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+
+        // IF YES (true), LEAVE FIGHT
+        if (confirmSkip) {
+            window.alert(playerName + " has decided to skip this fight. Goodbye!");
+            // SUBTRACT MONEY FROM playerMoney for skipping
+            playerMoney = playerMoney - 2;
+        }
+        // IF NO (false), ASK QUESTION AGAIN BY RUNNING fight() AGAIN
+        else {
+            fight();
+        }
+        // IF PLAYER DID NOT CHOSE 1 OR 2 IN PROMPT
+    } else {
+        window.alert("You need to pick a valid option. Try again!");
     }
-    else {
-        window.alert(enemyName + " still has " + enemyHealth + " health left.");
-    }
-
-    // LOG A RESULTING MESSAGE TO THE CONSOLE SO WE KNOW THAT IT WORKED
-    console.log(
-        enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining.");
-
-    // CHECK PLAYER'S HEALTH
-    if (playerHealth <= 0) {
-        window.alert(playerName + " has died!");
-    }
-    else {
-        window.alert(playerName + " still has " + playerHealth + " health left.");
-    }
-
-};
+}
 
 fight();
